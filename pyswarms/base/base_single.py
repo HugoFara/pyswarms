@@ -53,9 +53,9 @@ class SwarmOptimizer(abc.ABC):
         ftol_iter=1,
         init_pos=None,
     ):
-        """Initialize the swarm
+        """Initialize the swarm.
 
-        Creates a Swarm class depending on the values initialized
+        Creates a Swarm class depending on the values initialized.
 
         Attributes
         ----------
@@ -113,6 +113,7 @@ class SwarmOptimizer(abc.ABC):
         self.ToHistory = namedtuple(
             "ToHistory",
             [
+                "cost",
                 "best_cost",
                 "mean_pbest_cost",
                 "mean_neighbor_cost",
@@ -137,6 +138,7 @@ class SwarmOptimizer(abc.ABC):
         hist : collections.namedtuple
             Must be of the same type as self.ToHistory
         """
+        self.all_costs_history.append(hist.cost)
         self.cost_history.append(hist.best_cost)
         self.mean_pbest_history.append(hist.mean_pbest_cost)
         self.mean_neighbor_history.append(hist.mean_neighbor_cost)
@@ -194,6 +196,7 @@ class SwarmOptimizer(abc.ABC):
         Otherwise, consider using positional arguments.
         """
         # Initialize history lists
+        self.all_costs_history = []
         self.cost_history = []
         self.mean_pbest_history = []
         self.mean_neighbor_history = []

@@ -114,6 +114,7 @@ class DiscreteSwarmOptimizer(abc.ABC):
         self.ToHistory = namedtuple(
             "ToHistory",
             [
+                "cost",
                 "best_cost",
                 "mean_pbest_cost",
                 "mean_neighbor_cost",
@@ -139,6 +140,7 @@ class DiscreteSwarmOptimizer(abc.ABC):
         hist : collections.namedtuple
             Must be of the same type as self.ToHistory
         """
+        self.all_costs_history.append(hist.cost)
         self.cost_history.append(hist.best_cost)
         self.mean_pbest_history.append(hist.mean_pbest_cost)
         self.mean_neighbor_history.append(hist.mean_neighbor_cost)
@@ -196,6 +198,7 @@ class DiscreteSwarmOptimizer(abc.ABC):
         Otherwise, consider using positional arguments.
         """
         # Initialize history lists
+        self.all_costs_history = []
         self.cost_history = []
         self.mean_pbest_history = []
         self.mean_neighbor_history = []
