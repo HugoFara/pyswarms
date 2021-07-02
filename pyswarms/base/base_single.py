@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 r"""
-Base class for single-objective Particle Swarm Optimization
-implementations.
+Base class for single-objective Particle Swarm Optimization implementations.
 
 All methods here are abstract and raise a :code:`NotImplementedError`
 when not used. When defining your own swarm implementation,
@@ -27,7 +26,8 @@ See Also
 --------
 :mod:`pyswarms.single.global_best`: global-best PSO implementation
 :mod:`pyswarms.single.local_best`: local-best PSO implementation
-:mod:`pyswarms.single.general_optimizer`: a more general PSO implementation with a custom topology
+:mod:`pyswarms.single.general_optimizer`: a more general PSO implementation
+with a custom topology
 """
 
 # Import standard library
@@ -125,7 +125,7 @@ class SwarmOptimizer(abc.ABC):
         self.reset()
 
     def _populate_history(self, hist):
-        """Populate all history lists
+        """Populate all history lists.
 
         The :code:`cost_history`, :code:`mean_pbest_history`, and
         :code:`neighborhood_best` is expected to have a shape of
@@ -147,7 +147,7 @@ class SwarmOptimizer(abc.ABC):
 
     @abc.abstractmethod
     def optimize(self, objective_func, iters, n_processes=None, **kwargs):
-        """Optimize the swarm for a number of iterations
+        """Optimize the swarm for a number of iterations.
 
         Performs the optimization to evaluate the objective
         function :code:`objective_func` for a number of iterations
@@ -173,7 +173,7 @@ class SwarmOptimizer(abc.ABC):
         raise NotImplementedError("SwarmOptimizer::optimize()")
 
     def reset(self):
-        """Reset the attributes of the optimizer
+        """Reset the attributes of the optimizer.
 
         All variables/atributes that will be re-initialized when this
         method is defined here. Note that this method

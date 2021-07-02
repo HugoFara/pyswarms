@@ -87,7 +87,7 @@ class GlobalBestPSO(SwarmOptimizer):
         ftol_iter=1,
         init_pos=None,
     ):
-        """Initialize the swarm
+        """Initialize the swarm.
 
         Attributes
         ----------
@@ -185,7 +185,6 @@ class GlobalBestPSO(SwarmOptimizer):
         tuple
             the global best cost and the global best position.
         """
-
         # Apply verbosity
         if verbose:
             log_level = logging.INFO

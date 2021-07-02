@@ -89,7 +89,7 @@ class GeneralOptimizerPSO(SwarmOptimizer):
         ftol_iter=1,
         init_pos=None,
     ):
-        """Initialize the swarm
+        """Initialize the swarm.
 
         Attributes
         ----------
