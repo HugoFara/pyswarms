@@ -167,7 +167,8 @@ class Mesher(object):
     alpha = attrib(type=float, validator=instance_of(float), default=0.3)
 
     def compute_history_3d(self, pos_history, n_processes=None):
-        """Compute a 3D position matrix.
+        """
+        Compute a 3D position matrix. DEPRECATED!
 
         The first two columns are the 2D position in the x and y axes
         respectively, while the third column is the fitness on that given
@@ -182,11 +183,29 @@ class Mesher(object):
         number of processes to use for parallel mesh point calculation
         (default: None = no parallelization)
 
+        Raises
+        ------
+        DeprecationWarning
+            Due to individual cost saved to swarm, this method is no longer
+            necessary and will be deleted in a future version.
+            Consider using
+            np.dstack((optimizer.pos_history, optimizer.all_cost_history))"
+            instead of
+            "mesher_object.compute_history_3d(optimizer.pos_history)
+
         Returns
         -------
         numpy.ndarray
             3D position matrix of shape :code:`(iterations, n_particles, 3)`
         """
+        raise DeprecationWarning(
+            "Plotting do no longer require recompute."
+            "Individual cost is now saved per Particle."
+            "Consider using "
+            "np.dstack((optimizer.pos_history, optimizer.all_cost_history))"
+            " instead of "
+            "mesher_object.compute_history_3d(optimizer.pos_history)"
+        )
 
         # Setup Pool of processes for parallel evaluation
         pool = None if n_processes is None else mp.Pool(n_processes)

@@ -288,8 +288,7 @@ def plot_surface(
         )
 
         # Prepare position history
-        m = Mesher(func=sphere)
-        pos_history_3d = m.compute_history_3d(optimizer.pos_history)
+        pos_history_3d = np.ndstack((optimizer.pos_history, optimizer.all_cost_history))
 
         # Plot!
         plot_surface(pos_history_3d)
