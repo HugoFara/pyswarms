@@ -122,3 +122,10 @@ class TestGeneralOptimizer(ABCTestOptimizer):
         optimizer.ftol_iter = 5
         optimizer.optimize(sphere, 2000)
         assert np.array(optimizer.cost_history).shape[0] >= optimizer.ftol_iter
+
+    def test_history_shape(self, optimizer):
+        """Check if elements saved in history have a good shape."""
+        optimizer.optimize(sphere, iters=5, save_cost=True)
+        assert np.shape(optimizer.pos_history) == (5, 10, 2)
+        assert np.shape(optimizer.all_costs_history) == (5, 10)
+        assert np.shape(optimizer.cost_history) == (5,)

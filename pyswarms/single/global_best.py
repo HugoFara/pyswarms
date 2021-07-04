@@ -158,7 +158,13 @@ class GlobalBestPSO(SwarmOptimizer):
         self.name = __name__
 
     def optimize(
-        self, objective_func, iters, n_processes=None, verbose=True, **kwargs
+        self,
+        objective_func,
+        iters,
+        n_processes=None,
+        verbose=True,
+        save_cost=False,
+        **kwargs
     ):
         """Optimize the swarm for a number of iterations.
 
@@ -176,7 +182,10 @@ class GlobalBestPSO(SwarmOptimizer):
             (default: None = no parallelization)
         verbose : bool
             enable or disable the logs and progress bar
-            (default: True = enable logs)
+            (default: True = enable logs).
+        save_cost : bool
+            if :code:`True` the complete cost matrix is saved each
+            step. Default is :code:`False`.
         kwargs : dict
             arguments for the objective function
 
@@ -231,7 +240,7 @@ class GlobalBestPSO(SwarmOptimizer):
                 position=self.swarm.position,
                 velocity=self.swarm.velocity,
             )
-            self._populate_history(hist)
+            self._populate_history(hist, save_cost=save_cost)
             # Verify stop criteria based on the relative acceptable cost ftol
             relative_measure = self.ftol * (1 + np.abs(best_cost_yet_found))
             delta = (

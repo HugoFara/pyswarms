@@ -126,7 +126,7 @@ class DiscreteSwarmOptimizer(abc.ABC):
         # Initialize resettable attributes
         self.reset()
 
-    def _populate_history(self, hist):
+    def _populate_history(self, hist, save_cost=False):
         """Populate all history lists.
 
         The :code:`cost_history`, :code:`mean_pbest_history`, and
@@ -138,9 +138,13 @@ class DiscreteSwarmOptimizer(abc.ABC):
         Parameters
         ----------
         hist : collections.namedtuple
-            Must be of the same type as self.ToHistory
+            Must be of the same type as self.ToHistory.
+        save_cost : bool
+            if :code:`False` the complete cost matrix is saved.
+            Default is :code:`False`.
         """
-        self.all_costs_history.append(hist.cost)
+        if save_cost:
+            self.all_costs_history.append(hist.cost)
         self.cost_history.append(hist.best_cost)
         self.mean_pbest_history.append(hist.mean_pbest_cost)
         self.mean_neighbor_history.append(hist.mean_neighbor_cost)
